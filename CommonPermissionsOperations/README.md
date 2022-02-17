@@ -1,46 +1,13 @@
 # Common Permissions Operations
 
-# Шаг 0. Проверить доступность формы для GDPR
+# Шаг 1. Проверить доступность формы для GDPR
 
 https://apps.admob.com/v2/privacymessaging/gdpr/education?_ga=2.232494495.1255054913.1645042919-509983612.1645042919&_gl=1*1b98d9n*_ga*NTA5OTgzNjEyLjE2NDUwNDI5MTk.*_ga_6R1K8XRD9P*MTY0NTA0MjkxOC4xLjAuMTY0NTA0MjkxOS4w
 
-# Шаг 1. Добавить зависимости
+# Шаг 2. Добавить зависимости
 
 1. `RKOperations`
 2. `RKFunctional`
-
-# Шаг 2. Запустить флоу запроса разрешений
-
-После показа контроллера, желательно все алерты на старте встроить в этот флоу
-
-```swift
-private let operationsQueue = RKOperationQueue()
-
-func requestAppPermissions() {
-    var operations: [RKOperation] = []
-    
-    let policyOperation = PrivacyPolicyAlertOperation(
-        controller: rootViewController,
-        serviceSettings: main.serviceSettings,
-        context: .init(privacyPolicyURL: main.config.privacyPolicyURL, termsOfUseURL: main.config.termsOfUseURL)
-    )
-    operations.append(policyOperation)
-    
-    let appTrackingOperation = AppTrackingTransparencyAlertOperation()
-    operations.append(appTrackingOperation)
-    
-    let adMobConsentOperation = AdMobConsentPresentOperation(
-        controller: rootViewController,
-        serviceSettings: main.serviceSettings,
-        adMobConsent: main.adMobConsent
-    )
-    operations.append(adMobConsentOperation)
-    
-    policyOperation <- appTrackingOperation <- adMobConsentOperation
-    
-    operationsQueue.addOperations(operations, waitUntilFinished: false)
-}
-```
 
 # Шаг 3. Добавить строки для локализации
 
@@ -65,6 +32,8 @@ func requestAppPermissions() {
 ```
 
 # Шаг 4. Добавить Flow для запроса разрешений
+
+После показа контроллера, желательно все алерты на старте встроить в этот флоу
 
 ### Пример:
 
@@ -110,18 +79,6 @@ final class RequestPermissionsFlow {
         }
         
         operationsQueue.addOperations(operations, waitUntilFinished: false)
-    }
-}
-
-private extension RequestPermissionsFlow {
-    struct Context {
-        let isPrivacyAccepted: Bool
-        
-    }
-    
-    struct Handler {
-        let privacyAccepted: () -> Void
-        let openURL: (URL) -> Void
     }
 }
 ```
