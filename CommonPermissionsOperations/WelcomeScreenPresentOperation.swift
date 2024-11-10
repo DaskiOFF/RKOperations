@@ -3,7 +3,7 @@ import RKWelcomeScreen
 import RKOperations
 
 /// Показывает привественный экран
-final class WelcomeScreenPresentOperation: RKOperation {
+final class WelcomeScreenPresentOperation: RKOperation, @unchecked Sendable {
     private weak var controller: UIViewController?
     private let model: RKWelcomeScreenViewController.Model
     

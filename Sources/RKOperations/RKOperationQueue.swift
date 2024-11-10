@@ -5,7 +5,7 @@ public protocol RKOperationQueueDelegate: AnyObject {
     func operationQueue(_ queue: OperationQueue, operationDidFinish operation: Operation, errors: [Error])
 }
 
-public class RKOperationQueue: OperationQueue {
+public class RKOperationQueue: OperationQueue, @unchecked Sendable {
     public weak var delegate: RKOperationQueueDelegate?
     
     /// Initialize new instance of RKOperationQueue with quality of service

@@ -2,7 +2,7 @@ import AppTrackingTransparency
 import RKOperations
 
 /// Запрашиваем доступ к отслеживанию в приложении (для получения IDFA)
-final class AppTrackingTransparencyAlertOperation: RKOperation {
+final class AppTrackingTransparencyAlertOperation: RKOperation, @unchecked Sendable {
     private let handler: Handler?
     
     init(handler: Handler? = nil) {

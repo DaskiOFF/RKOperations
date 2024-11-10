@@ -4,7 +4,7 @@ import RKOperations
 /// Показывает алерт на старте приложения с политикой, условиями использования и кнопкой принять
 ///
 /// Алерт будет показываться до тех пор, пока не будет нажата кнопка "Принять"
-final class PrivacyPolicyAlertOperation: RKOperation {
+final class PrivacyPolicyAlertOperation: RKOperation, @unchecked Sendable {
     private weak var controller: UIViewController?
     private let context: Context
     private let handler: Handler

@@ -8,7 +8,7 @@ import Foundation
 ///
 /// - Optional:
 ///     - `finished(with errors: [Error])`
-open class RKOperation: Operation {
+open class RKOperation: Operation, @unchecked Sendable {
     final public override class func keyPathsForValuesAffectingValue(forKey key: String) -> Set<String> {
         if ["isFinished", "isExecuting", "isReady"].contains(key) {
             return ["state"]

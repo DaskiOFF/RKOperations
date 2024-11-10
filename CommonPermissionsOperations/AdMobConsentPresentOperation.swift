@@ -3,7 +3,7 @@ import RKOperations
 import Combine
 import RKFunctional
 
-final class AdMobConsentPresentOperation: RKOperation {
+final class AdMobConsentPresentOperation: RKOperation, @unchecked Sendable {
     private var cancellable: AnyCancellable?
     private weak var controller: UIViewController?
     private let adMobConsent: Privacy.Model
